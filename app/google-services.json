@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "147000201214",
+    "project_id": "fitness-app-0118",
+    "storage_bucket": "fitness-app-0118.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147000201214:android:32ab3bc515be173d02baaf",
+        "android_client_info": {
+          "package_name": "com.lappy.loginapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "147000201214-464t48eec9mt4orgv1584p34dr6c3l47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1-ELxl3THEReeGjp2Qp7wfrtzFJY1B1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "147000201214-464t48eec9mt4orgv1584p34dr6c3l47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
