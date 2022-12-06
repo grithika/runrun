@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,7 +29,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button signIn;
 
     private FirebaseAuth mAuth;
+    private FirebaseAuth mUser;
     private ProgressBar progressBar;
+
+    FirebaseDatabase database;
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://fitness-app-0118-default-rtdb.firebaseio.com/").child("getdata");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,12 +110,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if(user.isEmailVerified()) {
-                        //redirect to homepage
-                        startActivity(new Intent(MainActivity.this, Homepage.class));
+                        //redirect to HomepageActivity
+                        startActivity(new Intent(MainActivity.this, HomepageActivity.class));
                     }
-                    else{
-                        user.isEmailVerified();
-                        Toast.makeText(MainActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
+                    else {
+                        user.sendEmailVerification();
+                        Toast.makeText(MainActivity.this, "Check your email to verify your account", Toast.LENGTH_LONG).show();
                     }
                 }
                 else{

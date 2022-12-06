@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background6"
     tools:context=".RegistrationPage">
 
     <ProgressBar
@@ -62,6 +63,8 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -79,6 +82,8 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -97,6 +102,8 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"
         app:layout_constraintVertical_bias="0.924" />
 
     <Button
@@ -109,6 +116,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/border"
         app:layout_constraintVertical_bias="0.695" />
 
     <EditText
@@ -127,6 +135,8 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -145,6 +155,8 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background6"
     tools:context=".MainActivity">
 
     <EditText
@@ -18,7 +19,9 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"/>
 
     <EditText
         android:id="@+id/password"
@@ -34,7 +37,9 @@
         app:layout_constraintBottom_toTopOf="@+id/signIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/appLogo"
@@ -61,7 +66,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/border"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/register"
@@ -73,6 +80,7 @@
         app:layout_constraintHorizontal_bias="0.972"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signIn"
+        android:textColor="@color/black"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -84,14 +92,15 @@
         android:text="Forgot password?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/signIn"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@+id/signIn" />
 
     <TextView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find your motiv"
-        app:layout_constraintBottom_toTopOf="@+id/emailIdR"
+        android:text="Find your motive"
+        app:layout_constraintBottom_toTopOf="@+id/emailId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

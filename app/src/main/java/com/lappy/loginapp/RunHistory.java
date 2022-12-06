@@ -3,7 +3,6 @@ package com.lappy.loginapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,17 +18,14 @@ public class RunHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run_history);
 
-        durationColumn = (TextView) findViewById(R.id.timeDisplay);
-        distanceColumn = (TextView) findViewById(R.id.distanceDisplay);
-        dateHeading = (TextView) findViewById(R.id.dateDetails);
-        DeleteButton = (Button) findViewById(R.id.deleteButton);
+        durationColumn = findViewById(R.id.timeDisplay);
+        distanceColumn = findViewById(R.id.distanceDisplay);
+        dateHeading = findViewById(R.id.dateDetails);
+        DeleteButton = findViewById(R.id.deleteButton);
 
-        DeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RunDatabase.DeleteData(durationColumn.getText().toString());
-                RunDatabase.DeleteData(RunDatabaseHelper.TABLE_NAME);
-            }
+        DeleteButton.setOnClickListener(view -> {
+            RunDatabase.DeleteData(durationColumn.getText().toString());
+            RunDatabase.DeleteData(RunDatabaseHelper.TABLE_NAME);
         });
 
 

@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 //import java.util.regex.Pattern;
@@ -25,9 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegistrationPage extends AppCompatActivity implements View.OnClickListener {
 
 
-//    DatabaseReference FirebaseDatabase= com.google.firebase.database.FirebaseDatabase.getInstance().getReferenceFromUrl("https://fitness-app-0118-default-rtdb.firebaseio.com/");
+    DatabaseReference FirebaseDatabase= com.google.firebase.database.FirebaseDatabase.getInstance().getReferenceFromUrl("https://fitness-app-0118-default-rtdb.firebaseio.com/");
 
-    private EditText firstname, lastname, age, emailId, pass;
+    private EditText firstname, lastname, years, emailId, pass;
     private TextView registerbtn, applogo;
     private ProgressBar progressBar;
 
@@ -50,7 +51,7 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
 
         firstname = (EditText) findViewById(R.id.firstName);
         lastname = (EditText) findViewById(R.id.lastName);
-        age = (EditText) findViewById(R.id.age);
+        years = (EditText) findViewById(R.id.age);
         emailId = (EditText) findViewById(R.id.emailIdR);
         pass = (EditText) findViewById(R.id.passwordR);
 
@@ -75,8 +76,8 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
     private void registerbtn() {
         String firstName = firstname.getText().toString().trim();
         String lastName = lastname.getText().toString().trim();
-        String age = this.age.getText().toString().trim();
-        String emailId = this.emailId.getText().toString().trim();
+        String age = years.getText().toString().trim();
+        String emailIdR = emailId.getText().toString().trim();
         String password = pass.getText().toString().trim();
 
         if(firstName.isEmpty()){
@@ -90,16 +91,16 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
             return;
         }
         if(age.isEmpty()) {
-            this.age.setError("Please enter your age!");
-            this.age.requestFocus();
+            this.years.setError("Please enter your age!");
+            this.years.requestFocus();
             return;
         }
-        if(emailId.isEmpty()) {
+        if(emailIdR.isEmpty()) {
             this.emailId.setError("Please enter your email address!");
             this.emailId.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(emailId).matches()){
+        if(!Patterns.EMAIL_ADDRESS.matcher(emailIdR).matches()){
             this.emailId.setError("Please type a valid email address!");
             this.emailId.requestFocus();
             return;
@@ -110,38 +111,40 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
             return;
         }
         if(password.length()<6){
-            pass.setError("Minimum 6 characters should be present");
+            pass.setError("Minimum 6 characters are required");
             pass.requestFocus();
             return;
         }
 
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.createUserWithEmailAndPassword(emailId, password)
+        mAuth.createUserWithEmailAndPassword(emailIdR, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //User user = new User(firstname, lastname, age1, emailid);
-                            User user = new User(firstName, lastName, age, emailId);
+                            User user = new User(firstName, lastName, age, emailIdR);
 
-                            FirebaseDatabase.getInstance().getReference("Users")
+                            FirebaseDatabase.getDatabase().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 
                                             if(task.isSuccessful()){
-                                                Toast.makeText(RegistrationPage.this, "User has been registered succesfully", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(RegistrationPage.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
 
-                                                //redirect to login layout
-                                            }else{
+                                                //redirect to login activity
+                                            }
+                                            else{
                                                 Toast.makeText(RegistrationPage.this, "Failed to register the user. Try again!", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                             }
                                         }
                                     });
-                        }else{
+                        }
+                        else{
                             Toast.makeText(RegistrationPage.this, "Failed to register the user!", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
 

@@ -6,74 +6,57 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.mediation.Adapter;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecyclerAdapter  extends RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>
-{
+public class RecyclerAdapter extends RecyclerView.Adapter {
 
     private ArrayList<RunActivityRetriever> arrayList;
-
-
-
-    private OnItemClickListener deleteListener;
-
+    private AdapterView.OnItemClickListener deleteListener;
 
     public interface OnItemClickListener {
         void onDeleteClick(int position);
-
-
     }
-
-
-    public void setItemListener(OnItemClickListener listener) {
-        deleteListener = listener;
-
-
-    }
-
-    public RecyclerAdapter(ArrayList<RunActivityRetriever> arrayList) {
+//    public interface SetItemListener(OnItemClickListener listener) {
+//        deleteListener = listener;
+//    }
+    public RecyclerAdapter(ArrayList<RunActivityRetriever> arrayList){
         this.arrayList = arrayList;
-
-
     }
-
-
-    //@Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_run_history, parent, false);
-        RecyclerViewHolder RVH = new RecyclerViewHolder(view, deleteListener, context, arrayList);
+        RecyclerViewHolder RVH = new RecyclerViewHolder(view, (OnItemClickListener) deleteListener, context, arrayList);
 
         return RVH;
     }
 
-
-    //@Override
-    public void onBindViewHolder(RecyclerAdapter.RecyclerViewHolder holder, int position) {
-
-        RunActivityRetriever retrieveRunnerActivity = arrayList.get(position);
-        holder.Duration_column.setText(String.valueOf(retrieveRunnerActivity.getElapsed_time()));
-        holder.Distance_column.setText(String.valueOf(retrieveRunnerActivity.getTotal_distance()));
-        holder.date_heading.setText(String.valueOf(retrieveRunnerActivity.getDate()));
-        holder.Entry_column.setText(String.valueOf(retrieveRunnerActivity.getId()));
-        holder.deleteButton.getContext();
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+//        RunActivityRetriever retrieveRunnerActivity = arrayList.get(position);
+//        holder.Duration_column.setText(String.valueOf(retrieveRunnerActivity.getElapsed_time()));
+//        holder.Distance_column.setText(String.valueOf(retrieveRunnerActivity.getTotal_distance()));
+//        holder.date_heading.setText(String.valueOf(retrieveRunnerActivity.getDate()));
+//        holder.Entry_column.setText(String.valueOf(retrieveRunnerActivity.getId()));
+//        holder.deleteButton.getContext();
 
     }
 
-
-    //@Override
+    @Override
     public int getItemCount() {
         return arrayList.size();
     }
 
-    public class RecyclerViewHolder extends androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         ImageView deleteButton;
         TextView Duration_column, Distance_column, date_heading, Entry_column;
@@ -97,7 +80,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<androidx.recyclerview
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if (position != androidx.recyclerview.widget.RecyclerView.NO_POSITION) {
+                    if (position != RecyclerView.NO_POSITION) {
                         AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(context);
                         dialogbuilder.setMessage("Delete activity permanently")
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

@@ -2,9 +2,13 @@ package com.lappy.loginapp;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+
 public class RecyclerView extends AppCompatActivity {
 
     private RecyclerAdapter recyclerAdapter;

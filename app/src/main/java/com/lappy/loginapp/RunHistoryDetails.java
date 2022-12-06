@@ -37,7 +37,7 @@ public class RunHistoryDetails extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view);
 
         recyclerView = recyclerView.findViewById(R.id.RecycleLayout);
-        EmptyActivity = recyclerView.findViewById(R.id.EmptyActivity);
+        //EmptyActivity = recyclerView.findViewById(R.id.EmptyActivity);
         RunDatabase = new RunDatabaseHelper(this);
 
 
@@ -67,9 +67,9 @@ public class RunHistoryDetails extends AppCompatActivity {
         } else
             EmptyActivity.setVisibility(View.VISIBLE);
 
-        RunDatabaseHelper.close();
+        //RunDatabaseHelper.close();
 
-        adapter = new RecyclerAdapter(arrayList);
+        //adapter = new RecyclerAdapter(arrayList);
         recyclerView.setAdapter(adapter);
 
 
@@ -86,7 +86,7 @@ public class RunHistoryDetails extends AppCompatActivity {
                     returnButton.post(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(RunHistoryDetails.this, Homepage.class);
+                            Intent intent = new Intent(RunHistoryDetails.this, HomepageActivity.class);
                             startActivity(intent);
                         }
                     });
@@ -116,21 +116,21 @@ public class RunHistoryDetails extends AppCompatActivity {
             }
         });
 
-        adapter.setItemListener(new RecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onDeleteClick(int position) {
-            }
-
-            @Override
-            public void onDelete(int position) {
-                deleteItems(position);
-            }
-
-            private void deleteItems(int position) {
-                arrayList.remove(position);
-                adapter.notifyItemRemoved(position);
-            }
-        });
+//        adapter.setItemListener(new RecyclerAdapter.OnItemClickListener() {
+//            @Override
+//            public void onDeleteClick(int position) {
+//            }
+//
+//            @Override
+//            public void onDelete(int position) {
+//                deleteItems(position);
+//            }
+//
+//            private void deleteItems(int position) {
+//                arrayList.remove(position);
+//                adapter.notifyItemRemoved(position);
+//            }
+//        });
 
     }
 }

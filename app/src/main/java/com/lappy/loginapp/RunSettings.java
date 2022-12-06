@@ -23,7 +23,6 @@ public class RunSettings extends AppCompatActivity {
     RadioButton onButton,offButton,kmButton, milesButton;
     SharedPreferences sharedPreferences, LastSelectedItem,LastChosen;
     SharedPreferences.Editor editor;
-//    boolean onetime_restart = true;
 
 
     @Override
@@ -36,7 +35,7 @@ public class RunSettings extends AppCompatActivity {
         LastChosen = getSharedPreferences("PriorSelected", Context.MODE_PRIVATE);
 
         backButton = findViewById(R.id.backButton);
-        distanceGroup = findViewById(R.id.DistanceGroup);
+        distanceGroup = findViewById(R.id.DistanceGroupSettings);
         milesButton = findViewById(R.id.MilesButton);
         kmButton = findViewById(R.id.KMButton);
         onButton = findViewById(R.id.OnButton);
@@ -70,7 +69,7 @@ public class RunSettings extends AppCompatActivity {
 //                            editor.putInt("LastSelection", Myposition);
 //                            editor.putInt("LastChosen", lingoPosition);
                             editor.apply();
-                            Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             startActivity(intent);
                         }
                     });
@@ -89,13 +88,10 @@ public class RunSettings extends AppCompatActivity {
             class KilometerBtnRunnable implements Runnable {
                 @Override
                 public void run() {
-                    kmButton.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(km_Button, kmButton.isChecked());
-                            editor.apply();
-                        }
+                    kmButton.post(() -> {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(km_Button, kmButton.isChecked());
+                        editor.apply();
                     });
                 }
             }
@@ -111,14 +107,11 @@ public class RunSettings extends AppCompatActivity {
             class MilesBtnRunnable implements Runnable {
                 @Override
                 public void run() {
-                    milesButton.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(miles_Button, milesButton.isChecked());
-                            editor.apply();
+                    milesButton.post(() -> {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(miles_Button, milesButton.isChecked());
+                        editor.apply();
 
-                        }
                     });
                 }
             }
@@ -138,13 +131,10 @@ public class RunSettings extends AppCompatActivity {
             class OnButtonRunnable implements Runnable {
                 @Override
                 public void run() {
-                    onButton.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(ON, onButton.isChecked());
-                            editor.apply();
-                        }
+                    onButton.post(() -> {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(ON, onButton.isChecked());
+                        editor.apply();
                     });
                 }
             }
@@ -160,13 +150,10 @@ public class RunSettings extends AppCompatActivity {
             class OffButtonRunnable implements Runnable {
                 @Override
                 public void run() {
-                    offButton.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(OFF, offButton.isChecked());
-                            editor.apply();
-                        }
+                    offButton.post(() -> {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(OFF, offButton.isChecked());
+                        editor.apply();
                     });
                 }
             }
@@ -176,14 +163,9 @@ public class RunSettings extends AppCompatActivity {
         onButton.setChecked(sharedPreferences.getBoolean(ON, false));
         offButton.setChecked(sharedPreferences.getBoolean(OFF, true));
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RunSettings.this,Homepage.class));
+        backButton.setOnClickListener(view -> startActivity(new Intent(RunSettings.this,HomepageActivity.class)));
 
-            }
-        });
-//        //@Override
+//        @Override
 //        public void onBackPressed() {
 //            SharedPreferences.Editor editor = sharedPreferences.edit();
 //            editor.putBoolean(miles_Button, milesButton.isChecked());
@@ -191,7 +173,7 @@ public class RunSettings extends AppCompatActivity {
 //            editor.putBoolean(ON,onButton.isChecked());
 //            editor.putBoolean(OFF, offButton.isChecked());
 //            editor.apply();
-//            Intent intent = new Intent(getApplicationContext(), Homepage.class);
+//            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
 //            startActivity(intent);
 //            finish();
 //        }

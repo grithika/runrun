@@ -9,23 +9,17 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -33,7 +27,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -59,7 +53,6 @@ public class RunInterface extends AppCompatActivity {
 
     TextView distanceCounter, speedInmph, speedInkmph, countdownTimerView;
     Button resumeButton, pauseButton, stopButton;
-    ImageView overlayscreen;
 
     Chronometer timer;
     CountDownTimer countDownTimer;
@@ -72,7 +65,7 @@ public class RunInterface extends AppCompatActivity {
     double distance = 0;
     double current_speed;
 
-    RadioGroup distanceButtonGroup;
+    LinearLayout distanceButtonGroup;
     RadioButton milesButton, kilometerButton;
 
     private static final int AccessCode = 48;
@@ -93,23 +86,19 @@ public class RunInterface extends AppCompatActivity {
         speedInmph = findViewById(R.id.speedInmph);
         speedInkmph = findViewById(R.id.speedInkmph);
         timer = findViewById(R.id.timer);
-        //countdownTimerView = findViewById(R.id.countdownTimerView);
-        //distanceButtonGroup = findViewById(R.id.distanceGroup);
-        //milesButton = findViewById(R.id.miles_btn);
-        //kilometerButton = findViewById(R.id.kilometer_btn);
-        //themeSpinner = findViewById(R.id.themeSpinner);
+        countdownTimerView = findViewById(R.id.CountdownTimerView);
+        distanceButtonGroup = findViewById(R.id.DistanceGroup);
+//        milesButton = findViewById(R.id.MilesButton);
+//        kilometerButton = findViewById(R.id.KMButton);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         fusionprovider = LocationServices.getFusedLocationProviderClient(RunInterface.this);
 
         CountDownSwitch();
 
 
-        timer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                if ((SystemClock.elapsedRealtime() - timer.getBase()) >= 86400000) {
-                    chronometer.setBase(SystemClock.elapsedRealtime());
-                }
+        timer.setOnChronometerTickListener(chronometer -> {
+            if ((SystemClock.elapsedRealtime() - timer.getBase()) >= 86400000) {
+                chronometer.setBase(SystemClock.elapsedRealtime());
             }
         });
 
@@ -123,29 +112,26 @@ public class RunInterface extends AppCompatActivity {
             class ResumeRunnable implements Runnable {
                 @Override
                 public void run() {
-                    resumeButton.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!active) {
-                                if (ContextCompat.checkSelfPermission(RunInterface.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                                        && ContextCompat.checkSelfPermission(RunInterface.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                                        && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                                        && ContextCompat.checkSelfPermission(RunInterface.this,
-                                        Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-                                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, (float) 0, (LocationListener) RunInterface.this);
-                                    createLocationRequest();
-                                    timer.setBase(SystemClock.elapsedRealtime() - update);
-                                    timer.start();
-                                    resumeButton.setVisibility(View.GONE);
-                                    pauseButton.setVisibility(View.VISIBLE);
-                                    active = true;
-                                } else {
-                                    RequestPermissions();
-                                    {
-                                    }
-                                    resumeButton.setVisibility(View.VISIBLE);
-                                    active = false;
+                    resumeButton.post(() -> {
+                        if (!active) {
+                            if (ContextCompat.checkSelfPermission(RunInterface.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                                    && ContextCompat.checkSelfPermission(RunInterface.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                                    && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                                    && ContextCompat.checkSelfPermission(RunInterface.this,
+                                    Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, (float) 0, (LocationListener) RunInterface.this);
+                                createLocationRequest();
+                                timer.setBase(SystemClock.elapsedRealtime() - update);
+                                timer.start();
+                                resumeButton.setVisibility(View.GONE);
+                                pauseButton.setVisibility(View.VISIBLE);
+                                active = true;
+                            } else {
+                                RequestPermissions();
+                                {
                                 }
+                                resumeButton.setVisibility(View.VISIBLE);
+                                active = false;
                             }
                         }
                     });
@@ -159,17 +145,14 @@ public class RunInterface extends AppCompatActivity {
                         class PauseRunnable implements Runnable {
                             @Override
                             public void run() {
-                                pauseButton.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (active) {
-                                            timer.stop();
-                                            active = false;
-                                            resumeButton.setVisibility(View.VISIBLE);
-                                            update = SystemClock.elapsedRealtime() - timer.getBase();
-                                            locationManager.removeUpdates((LocationListener) RunInterface.this);
+                                pauseButton.post(() -> {
+                                    if (active) {
+                                        timer.stop();
+                                        active = false;
+                                        resumeButton.setVisibility(View.VISIBLE);
+                                        update = SystemClock.elapsedRealtime() - timer.getBase();
+                                        locationManager.removeUpdates((LocationListener) RunInterface.this);
 
-                                        }
                                     }
                                 });
                             }
@@ -182,19 +165,12 @@ public class RunInterface extends AppCompatActivity {
                         public void onClick(View v) {
                             StopRunnable stopRunnable = new StopRunnable();
                             new Thread(stopRunnable).start();
-
-
                         }
 
                         class StopRunnable implements Runnable {
                             @Override
                             public void run() {
-                                stopButton.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        SaveData();
-                                    }
-                                });
+                                stopButton.post(RunInterface.this::SaveData);
                             }
                         }
                     });
@@ -209,30 +185,24 @@ public class RunInterface extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("Location Permission Required")
                     .setMessage("Please allow permission access to proceed.")
-                    .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                ActivityCompat.requestPermissions(RunInterface.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                                Manifest.permission.ACCESS_COARSE_LOCATION,
-                                                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                                                Manifest.permission.READ_PHONE_STATE}, AccessCode);
-                            }
+                    .setPositiveButton("Accept", (dialog, id) -> {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                             ActivityCompat.requestPermissions(RunInterface.this,
                                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                                             Manifest.permission.ACCESS_COARSE_LOCATION,
+                                            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                                             Manifest.permission.READ_PHONE_STATE}, AccessCode);
                         }
+                        ActivityCompat.requestPermissions(RunInterface.this,
+                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.READ_PHONE_STATE}, AccessCode);
                     })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
+                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
                     .create().show();
 
-        } else {
+        }
+        else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
@@ -255,7 +225,8 @@ public class RunInterface extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 LocationCall();
 
-            } else {
+            }
+            else {
                 Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
 
             }
@@ -273,20 +244,14 @@ public class RunInterface extends AppCompatActivity {
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
             dialogbuilder.setMessage(" Enable GPS To Continue")
-                    .setPositiveButton("Turn location on", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent call_gps_settings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(call_gps_settings);
+                    .setPositiveButton("Turn location on", (dialog, which) -> {
+                        Intent call_gps_settings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(call_gps_settings);
 
 
-                        }
                     })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    .setNegativeButton("Cancel", (dialog, which) -> {
 
-                        }
                     });
             AlertDialog alertDialog = dialogbuilder.create();
             alertDialog.show();
@@ -294,7 +259,7 @@ public class RunInterface extends AppCompatActivity {
     }
 
 
-    @Override
+    //@Override
     public void onLocationChanged(Location location) {
         current_location = location;
         if (start_location == null) {
@@ -314,21 +279,21 @@ public class RunInterface extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
+//    @Override
+//    public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(String provider) {
+//
+//    }
+//
+//
+//    @Override
+//    public void onProviderDisabled(String provider) {
+//
+//    }
 
 
     private void distanceInMiles() {
@@ -363,19 +328,10 @@ public class RunInterface extends AppCompatActivity {
         final boolean MetricUnit = sharedPreferences.getBoolean(RunSettings.km_Button, true);
         if (MetricUnit) {
             distanceInkilometers();
-        } else
+        }
+        else
             distanceInMiles();
     }
-
-
-//    public void VoiceCountdown() {
-//        final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(GetInfo, MODE_PRIVATE);
-//        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.count_down_voice);
-//        //boolean VoiceSwitch = sharedPreferences.getBoolean(settings.VoiceON, true);
-//        if (VoiceSwitch) {
-//            mediaPlayer.start();
-//        }
-//    }
     private void StartCountDown() {
         countDownTimer = new CountDownTimer(TimeLeft, 1000) {
             @Override
@@ -427,10 +383,9 @@ public class RunInterface extends AppCompatActivity {
 
     private void CountDownSwitch() {
         final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(GetInfo, MODE_PRIVATE);
-        final boolean TimerSwitch = sharedPreferences.getBoolean(RunSettings.On, false);
+        final boolean TimerSwitch = sharedPreferences.getBoolean(String.valueOf(RunSettings.class), false);
         if (TimerSwitch) {
             StartCountDown();
-            //VoiceCountdown();
         } else
             countdownTimerView.setVisibility(View.GONE);
 
@@ -441,8 +396,8 @@ public class RunInterface extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             resumeButton.performContextClick();
         }
-        View playButton = findViewById(R.id.resume_button);
-        playButton.performClick();
+        View resumeButton = findViewById(R.id.resume_button);
+        resumeButton.performClick();
 
     }
 
@@ -451,25 +406,20 @@ public class RunInterface extends AppCompatActivity {
         new AlertDialog.Builder(RunInterface.this)
                 .setTitle("Save Activity To History")
                 .setMessage("Would you like to save your activity?.")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        CalenderDate();
-                        boolean dataSaved = Run_database.insertData(timer.getText().toString(), distanceCounter.getText().toString(), current_date);
-                        boolean dataUpdate = Run_database.updateData(timer.getText().toString(), distanceCounter.getText().toString(), current_date);
-                        if (dataSaved && dataUpdate)
-                            Toast.makeText(RunInterface.this, "Activity Saved To History", Toast.LENGTH_LONG).show();
-                        StopActivity();
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    CalenderDate();
+                    boolean dataSaved = Run_database.insertData(timer.getText().toString(), distanceCounter.getText().toString(), current_date);
+                    boolean dataUpdate = Run_database.updateData(timer.getText().toString(), distanceCounter.getText().toString(), current_date);
+                    if (dataSaved && dataUpdate)
+                        Toast.makeText(RunInterface.this, "Activity Saved To History", Toast.LENGTH_LONG).show();
+                    StopActivity();
 
 
-                    }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        StopActivity();
+                .setNegativeButton("No", (dialog, which) -> {
+                    dialog.dismiss();
+                    StopActivity();
 
-                    }
                 })
                 .create().show();
 
@@ -499,67 +449,9 @@ public class RunInterface extends AppCompatActivity {
 
     }
 
-
-    PhoneStateListener phoneStateListener = new PhoneStateListener() {
-        @Override
-        public void onCallStateChanged(int state, String phoneNumber) {
-
-            if (state == TelephonyManager.CALL_STATE_RINGING || state == TelephonyManager.CALL_STATE_OFFHOOK) {
-                timer.stop();
-                active = false;
-                resumeButton.setVisibility(View.VISIBLE);
-                update = SystemClock.elapsedRealtime() - timer.getBase();
-                locationManager.removeUpdates((LocationListener) RunInterface.this);
-            } else if (state == TelephonyManager.CALL_STATE_IDLE) {
-                timer.stop();
-                active = false;
-                resumeButton.setVisibility(View.VISIBLE);
-                update = SystemClock.elapsedRealtime() - timer.getBase();
-                locationManager.removeUpdates((LocationListener) RunInterface.this);
-
-            }
-        }
-    };
-
-
-//    public void ActiveApp() {
-//        ComponentName componentName = new ComponentName(this, IncomingCall.class);
-//        getPackageManager().setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-//                PackageManager.DONT_KILL_APP);
-//
-//    }
-//
-//    public void ClosedApp() {
-//        ComponentName componentName = new ComponentName(this, IncomingCall.class);
-//        getPackageManager().setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-//                PackageManager.DONT_KILL_APP);
-//
-//
-//    }
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
-//        ClosedApp();
-//    }
-//
-//    @Override
-//    protected void onPostResume() {
-//        super.onPostResume();
-//        ActiveApp();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
-//        ClosedApp();
-//    }
-
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Homepage.class);
+        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
         startActivity(intent);
         finish();
     }
