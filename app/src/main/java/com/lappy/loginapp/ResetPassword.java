@@ -15,6 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ResetPassword extends AppCompatActivity {
 
     private EditText email;
@@ -51,8 +54,10 @@ public class ResetPassword extends AppCompatActivity {
             this.email.requestFocus();
             return;
         }
+        Pattern regexPattern = Pattern.compile("^(.+)@(.+)$ ");
+        Matcher matcher = regexPattern.matcher(email);
 
-        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if(matcher.find()){
             this.email.setError("Please provide a valid email");
             this.email.requestFocus();
             return;

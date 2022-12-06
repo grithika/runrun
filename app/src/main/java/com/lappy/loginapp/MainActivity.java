@@ -89,13 +89,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             emailId.requestFocus();
             return;
         }
-        Pattern pattern = Pattern.compile("\\w\\@\\w\\.\\w");
-        Matcher matcher = pattern.matcher(email);
+//        Pattern pattern = Pattern.compile("\\w\\@\\w\\.\\w");
+//        Matcher matcher = pattern.matcher(email);
+        Pattern regexPattern = Pattern.compile("^(.+)@(.+)$ ");
+        Matcher matcher = regexPattern.matcher(email);
 //        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
         if(matcher.find()){
             emailId.setError("Enter a valid email ID!");
             emailId.requestFocus();
-            return;
+        return;
         }
         if (password.isEmpty()){
             this.password.setError("Password is required");
