@@ -30,7 +30,10 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
-        app:layout_constraintVertical_bias="0.009" />
+        app:layout_constraintVertical_bias="0.009"
+        android:textColor="@color/purple_500"
+        android:textSize="18sp"
+        android:textStyle="italic"/>
 
     <TextView
         android:id="@+id/appLogo"
@@ -39,13 +42,15 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="MY FITNESS APP"
+        android:text="RUNRUN"
         android:textAlignment="center"
         android:textSize="48sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/firstName"
@@ -64,7 +69,7 @@
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
-        android:gravity="center"
+        android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -83,7 +88,7 @@
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
-        android:gravity="center"
+        android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -103,21 +108,21 @@
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
-        android:gravity="center"
+        android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="0.924" />
 
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:text="Sign-Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/border"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.775" />
 
     <EditText
         android:id="@+id/emailIdR"
@@ -136,7 +141,7 @@
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
-        android:gravity="center"
+        android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -156,7 +161,7 @@
         app:layout_constraintStart_toStartOf="@id/registerBtn"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
-        android:gravity="center"
+        android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

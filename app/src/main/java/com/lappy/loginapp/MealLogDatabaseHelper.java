@@ -1,5 +1,6 @@
 package com.lappy.loginapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -13,7 +14,7 @@ public class MealLogDatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_ID = "ID";
     public static final String COL_DATE = "Date";
     public static final String COL_DES = "Description";
-    public static final String COL_IMG = "Photo";
+    public static final String COL_IMAGE = "Image";
 
     public MealLogDatabaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -22,12 +23,21 @@ public class MealLogDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLES_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT, date String, Description String, Photo BLOG)");
+        db.execSQL("create table " + TABLES_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT, date String, Description String, Image BLOG)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLES_NAME);
         onCreate(db);
+    }
+    public  boolean insertMealLogData(String description, byte[] image){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_DES, description);
+        contentValues.put(COL_IMAGE, image);
+        long res = db.insert(TABLES_NAME, null, contentValues);
+        if (res == -1) return false;
+        else return true;
     }
 }

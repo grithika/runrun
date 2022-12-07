@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomepageActivity">
+    tools:context=".HomepageActivity"
+    android:backgroundTint="@color/white">
 
     <TextView
         android:id="@+id/appLogo"
@@ -12,7 +13,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="MY FITNESS APP"
+        android:text="RUNRUN"
         android:textAlignment="center"
         android:textSize="48sp"
         app:autoSizeTextType="uniform"
@@ -21,7 +22,8 @@
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007" />
+        app:layout_constraintVertical_bias="0.007"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/logo"
@@ -33,7 +35,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
-        app:layout_constraintVertical_bias="0.009" />
+        app:layout_constraintVertical_bias="0.009"
+        android:textColor="@color/black"/>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
