@@ -30,13 +30,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find your motive"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
-        app:layout_constraintVertical_bias="0.009"
-        android:textColor="@color/black"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -58,7 +58,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/logMealImageView"
+                android:id="@+id/homepageLogMeal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -74,7 +74,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/mealHistoryImageView"
+                android:id="@+id/homepageLogMealHistory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -120,7 +120,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/startRunImageView"
+                android:id="@+id/homepageStartRun"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -136,7 +136,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/runSettingsImageView"
+                android:id="@+id/homepageRunSettings"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -152,7 +152,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/runHistoryImageView"
+                android:id="@+id/homepageRunHistory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"

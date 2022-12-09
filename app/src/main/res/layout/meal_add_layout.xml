@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/dateLayout"
+        android:id="@+id/addMealDateLayout"
         android:layout_width="401dp"
         android:layout_height="55dp"
         android:orientation="horizontal"
@@ -17,7 +17,7 @@
         app:layout_constraintVertical_bias="0.023">
 
         <TextView
-            android:id="@+id/DateTextView"
+            android:id="@+id/addMealDateTextView"
             android:layout_width="139dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -25,7 +25,7 @@
             android:text="Date" />
 
         <EditText
-            android:id="@+id/DateEditText"
+            android:id="@+id/addMealDateInput"
             android:layout_width="256dp"
             android:layout_height="55dp"
             android:layout_marginBottom="5dp"
@@ -34,7 +34,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/descriptionLayout"
+        android:id="@+id/addMealDescriptionLayout"
         android:layout_width="401dp"
         android:layout_height="55dp"
         android:orientation="horizontal"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.121">
 
         <TextView
-            android:id="@+id/DescriptionTextView"
+            android:id="@+id/addMealDescriptionTextView"
             android:layout_width="144dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -53,7 +53,7 @@
             android:text="Description" />
 
         <EditText
-            android:id="@+id/DescptionEditText"
+            android:id="@+id/addMealDescptionInput"
             android:layout_width="267dp"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -63,12 +63,12 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/mealLogImageView"
+        android:id="@+id/addMealImageView"
         android:layout_width="351dp"
         android:layout_height="329dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dateLayout"
+        app:layout_constraintTop_toTopOf="@+id/addMealDateLayout"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 </androidx.constraintlayout.widget.ConstraintLayout>

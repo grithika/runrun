@@ -1,13 +1,11 @@
 package com.lappy.loginapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +34,7 @@ public class RunHistoryDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
 
-        recyclerView = recyclerView.findViewById(R.id.RecycleLayout);
+        recyclerView = recyclerView.findViewById(R.id.recyclerViewRecycleLayout);
         //EmptyActivity = recyclerView.findViewById(R.id.EmptyActivity);
         RunDatabase = new RunDatabaseHelper(this);
 

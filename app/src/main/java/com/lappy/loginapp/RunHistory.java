@@ -18,8 +18,8 @@ public class RunHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run_history);
 
-        durationColumn = findViewById(R.id.timeDisplay);
-        distanceColumn = findViewById(R.id.distanceDisplay);
+        durationColumn = findViewById(R.id.runHistoryTimeDisplay);
+        distanceColumn = findViewById(R.id.runHistoryDistanceDisplay);
         dateHeading = findViewById(R.id.dateDetails);
         DeleteButton = findViewById(R.id.deleteButton);
 

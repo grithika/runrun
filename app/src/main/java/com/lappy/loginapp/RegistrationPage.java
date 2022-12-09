@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 //import java.util.regex.Pattern;
 
@@ -46,16 +45,16 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
         applogo = (TextView) findViewById(R.id.appLogo);
         applogo.setOnClickListener(this);
 
-        registerbtn = (TextView) findViewById(R.id.registerBtn);
+        registerbtn = (TextView) findViewById(R.id.registrationPageRegisterButton);
         registerbtn.setOnClickListener(this);
 
-        firstname = (EditText) findViewById(R.id.firstName);
-        lastname = (EditText) findViewById(R.id.lastName);
-        years = (EditText) findViewById(R.id.age);
-        emailId = (EditText) findViewById(R.id.emailIdR);
-        pass = (EditText) findViewById(R.id.passwordR);
+        firstname = (EditText) findViewById(R.id.registrationPageFirstName);
+        lastname = (EditText) findViewById(R.id.registrationPageLastName);
+        years = (EditText) findViewById(R.id.registrationPageAge);
+        emailId = (EditText) findViewById(R.id.registrationPageEmailId);
+        pass = (EditText) findViewById(R.id.registrationPagePassword);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.registrationPageProgressBar);
 
 
     }
@@ -66,7 +65,7 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
             case R.id.appLogo:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-            case R.id.registerBtn:
+            case R.id.registrationPageRegisterButton:
                 registerbtn();
                 break;
         }

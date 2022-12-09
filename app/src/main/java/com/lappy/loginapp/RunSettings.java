@@ -34,13 +34,13 @@ public class RunSettings extends AppCompatActivity {
         LastSelectedItem = getSharedPreferences("PriorSelected", Context.MODE_PRIVATE);
         LastChosen = getSharedPreferences("PriorSelected", Context.MODE_PRIVATE);
 
-        backButton = findViewById(R.id.backButton);
-        distanceGroup = findViewById(R.id.DistanceGroupSettings);
-        milesButton = findViewById(R.id.MilesButton);
-        kmButton = findViewById(R.id.KMButton);
-        onButton = findViewById(R.id.OnButton);
-        offButton = findViewById(R.id.OffButton);
-        countdownGroup = findViewById(R.id.CountdownGroup);
+        backButton = findViewById(R.id.runSettingsBackButton);
+        distanceGroup = findViewById(R.id.runSettingsDistanceGroupButtons);
+        milesButton = findViewById(R.id.runSettingsMilesButton);
+        kmButton = findViewById(R.id.runSettingsKMButton);
+        onButton = findViewById(R.id.runSettingsOnButton);
+        offButton = findViewById(R.id.runSettingsOffButton);
+        countdownGroup = findViewById(R.id.runSettingsCountdownGroupButtons);
 
         final int LastSelection = LastSelectedItem.getInt("LastSelection", 0);
         editor = LastSelectedItem.edit();

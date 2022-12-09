@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find your motive"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewHistoryTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,18 +36,18 @@
         app:layout_constraintVertical_bias="0.009" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="408dp"
-        android:layout_height="51dp"
+        android:id="@+id/recyclerViewHistoryTextView"
+        android:layout_width="406dp"
+        android:layout_height="42dp"
         android:text="History"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.179" />
 
     <Button
         android:id="@+id/backbutton"
@@ -58,18 +58,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHistoryTextView"
         app:layout_constraintVertical_bias="0.974" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecycleLayout"
-        android:layout_width="404dp"
-        android:layout_height="507dp"
+        android:id="@+id/recyclerViewRecycleLayout"
+        android:layout_width="412dp"
+        android:layout_height="446dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintVertical_bias="0.534" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

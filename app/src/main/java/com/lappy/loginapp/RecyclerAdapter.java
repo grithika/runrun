@@ -66,10 +66,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
         RecyclerViewHolder(final View view, final OnItemClickListener listener, final Context context, final ArrayList arrayList) {
 
             super(view);
-            Duration_column = view.findViewById(R.id.timeDisplay);
-            Distance_column = view.findViewById(R.id.distanceDisplay);
+            Duration_column = view.findViewById(R.id.runHistoryTimeDisplay);
+            Distance_column = view.findViewById(R.id.runHistoryDistanceDisplay);
             date_heading = view.findViewById(R.id.dateDetails);
-            Entry_column = view.findViewById(R.id.entryDisplay);
+            Entry_column = view.findViewById(R.id.runHistoryEntryDisplay);
             deleteButton = view.findViewById(R.id.deleteButton);
             deleteButton.setTag(deleteListener);
             final RecyclerAdapter adapter = new RecyclerAdapter(arrayList);

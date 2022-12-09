@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,20 +43,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        register = (TextView) findViewById(R.id.register);
+        register = (TextView) findViewById(R.id.mainActivityRegisterButton);
         register.setOnClickListener(this);
 
-        signIn = (Button) findViewById(R.id.signIn);
+        signIn = (Button) findViewById(R.id.mainActivitySignInButton);
         signIn.setOnClickListener(this);
 
-        emailId = (EditText) findViewById(R.id.emailId);
-        password = (EditText) findViewById(R.id.password);
+        emailId = (EditText) findViewById(R.id.mainActivityEmailId);
+        password = (EditText) findViewById(R.id.mainActivityPassword);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.registrationPageProgressBar);
 
         mAuth = FirebaseAuth.getInstance();
 
-        resetPassword = (TextView) findViewById(R.id.resetPassword);
+        resetPassword = (TextView) findViewById(R.id.mainActivityResetPasswordButton);
         resetPassword.setOnClickListener(this);
 
 
@@ -66,13 +65,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.register:
+            case R.id.mainActivityRegisterButton:
                 startActivity(new Intent(this, RegistrationPage.class));
                 break;
-            case R.id.signIn:
+            case R.id.mainActivitySignInButton:
                 userLogin();
                 break;
-            case R.id.resetPassword:
+            case R.id.mainActivityResetPasswordButton:
                 startActivity(new Intent(this, ResetPassword.class));
                 break;
         }

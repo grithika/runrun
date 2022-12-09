@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find your motive"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintBottom_toTopOf="@+id/runHistoryTableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         android:textStyle="italic"/>
 
     <TableLayout
-        android:id="@+id/tableLayout"
+        android:id="@+id/runHistoryTableLayout"
         android:layout_width="404dp"
         android:layout_height="535dp"
         android:layout_marginStart="1dp"
@@ -88,7 +88,7 @@
             android:padding="1dp">
 
             <TextView
-                android:id="@+id/column1"
+                android:id="@+id/runHistoryColumn1"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:text="Entry"
@@ -96,7 +96,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/column2"
+                android:id="@+id/runHistoryColumn2"
                 android:layout_width="121dp"
                 android:layout_height="match_parent"
                 android:text="Time"
@@ -104,7 +104,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/column3"
+                android:id="@+id/runHistoryColumn3"
                 android:layout_width="121dp"
                 android:layout_height="match_parent"
                 android:text="Distance"
@@ -119,7 +119,7 @@
             android:padding="1dp">
 
             <TextView
-                android:id="@+id/entryDisplay"
+                android:id="@+id/runHistoryEntryDisplay"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:text="0"
@@ -127,7 +127,7 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/timeDisplay"
+                android:id="@+id/runHistoryTimeDisplay"
                 android:layout_width="121dp"
                 android:layout_height="match_parent"
                 android:text="0:00"
@@ -135,7 +135,7 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/distanceDisplay"
+                android:id="@+id/runHistoryDistanceDisplay"
                 android:layout_width="121dp"
                 android:layout_height="match_parent"
                 android:text="0.00 KM"

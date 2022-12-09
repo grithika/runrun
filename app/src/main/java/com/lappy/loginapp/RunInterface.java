@@ -29,7 +29,6 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,15 +78,15 @@ public class RunInterface extends AppCompatActivity {
 
         Run_database = new RunDatabaseHelper(this);
 
-        distanceCounter = findViewById(R.id.distanceCounter);
-        resumeButton = findViewById(R.id.resume_button);
-        pauseButton = findViewById(R.id.pause_button);
-        stopButton = findViewById(R.id.stop_button);
-        speedInmph = findViewById(R.id.speedInmph);
-        speedInkmph = findViewById(R.id.speedInkmph);
-        timer = findViewById(R.id.timer);
-        countdownTimerView = findViewById(R.id.CountdownTimerView);
-        distanceButtonGroup = findViewById(R.id.DistanceGroup);
+        distanceCounter = findViewById(R.id.runInterfaceDistanceCounter);
+        resumeButton = findViewById(R.id.runInterfaceResumeButton);
+        pauseButton = findViewById(R.id.runInterfacePauseButton);
+        stopButton = findViewById(R.id.runInterfaceStopButton);
+        speedInmph = findViewById(R.id.runInterfaceSpeedInmph);
+        speedInkmph = findViewById(R.id.runInterfaceSpeedInkmph);
+        timer = findViewById(R.id.runInterfaceTimer);
+        countdownTimerView = findViewById(R.id.runInterfaceCountdownTimerView);
+        distanceButtonGroup = findViewById(R.id.runInterfaceDistanceGroup);
 //        milesButton = findViewById(R.id.MilesButton);
 //        kilometerButton = findViewById(R.id.KMButton);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -396,7 +395,7 @@ public class RunInterface extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             resumeButton.performContextClick();
         }
-        View resumeButton = findViewById(R.id.resume_button);
+        View resumeButton = findViewById(R.id.runInterfaceResumeButton);
         resumeButton.performClick();
 
     }

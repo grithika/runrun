@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,9 +31,9 @@ public class ResetPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
-        email  = (EditText) findViewById(R.id.email);
-        resetPasswordButton = (Button) findViewById(R.id.resetButton);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        email  = (EditText) findViewById(R.id.resetPasswordActivityEmail);
+        resetPasswordButton = (Button) findViewById(R.id.resetPasswordResetButton);
+        progressBar = (ProgressBar) findViewById(R.id.registrationPageProgressBar);
 
         auth = FirebaseAuth.getInstance();
 

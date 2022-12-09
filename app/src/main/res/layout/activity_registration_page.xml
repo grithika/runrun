@@ -8,7 +8,7 @@
     tools:context=".RegistrationPage">
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/registrationPageProgressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBtn"
+        app:layout_constraintTop_toBottomOf="@+id/registrationPageRegisterButton"
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find your motive"
-        app:layout_constraintBottom_toTopOf="@+id/firstName"
+        app:layout_constraintBottom_toTopOf="@+id/registrationPageFirstName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/firstName"
+        android:id="@+id/registrationPageFirstName"
         android:layout_width="356dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
@@ -63,17 +63,17 @@
         android:ems="10"
         android:hint="First name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/lastName"
-        app:layout_constraintEnd_toEndOf="@id/registerBtn"
+        app:layout_constraintBottom_toTopOf="@+id/registrationPageLastName"
+        app:layout_constraintEnd_toEndOf="@id/registrationPageRegisterButton"
         app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="@id/registerBtn"
+        app:layout_constraintStart_toStartOf="@id/registrationPageRegisterButton"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
         android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/age"
+        android:id="@+id/registrationPageAge"
         android:layout_width="356dp"
         android:layout_height="49dp"
         android:layout_marginStart="16dp"
@@ -82,17 +82,17 @@
         android:ems="10"
         android:hint="Age"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/emailIdR"
-        app:layout_constraintEnd_toEndOf="@id/registerBtn"
+        app:layout_constraintBottom_toTopOf="@+id/registrationPageEmailId"
+        app:layout_constraintEnd_toEndOf="@id/registrationPageRegisterButton"
         app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="@id/registerBtn"
+        app:layout_constraintStart_toStartOf="@id/registrationPageRegisterButton"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
         android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/passwordR"
+        android:id="@+id/registrationPagePassword"
         android:layout_width="354dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -102,17 +102,17 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/registerBtn"
-        app:layout_constraintEnd_toEndOf="@id/registerBtn"
+        app:layout_constraintBottom_toTopOf="@+id/registrationPageRegisterButton"
+        app:layout_constraintEnd_toEndOf="@id/registrationPageRegisterButton"
         app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="@id/registerBtn"
+        app:layout_constraintStart_toStartOf="@id/registrationPageRegisterButton"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
         android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="0.924" />
 
     <Button
-        android:id="@+id/registerBtn"
+        android:id="@+id/registrationPageRegisterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
@@ -125,7 +125,7 @@
         app:layout_constraintVertical_bias="0.775" />
 
     <EditText
-        android:id="@+id/emailIdR"
+        android:id="@+id/registrationPageEmailId"
         android:layout_width="356dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -135,17 +135,17 @@
         android:ems="10"
         android:hint="Email address"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/passwordR"
-        app:layout_constraintEnd_toEndOf="@id/registerBtn"
+        app:layout_constraintBottom_toTopOf="@+id/registrationPagePassword"
+        app:layout_constraintEnd_toEndOf="@id/registrationPageRegisterButton"
         app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="@id/registerBtn"
+        app:layout_constraintStart_toStartOf="@id/registrationPageRegisterButton"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
         android:paddingLeft="15dp"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/lastName"
+        android:id="@+id/registrationPageLastName"
         android:layout_width="357dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -155,10 +155,10 @@
         android:ems="10"
         android:hint="Last Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/age"
-        app:layout_constraintEnd_toEndOf="@id/registerBtn"
+        app:layout_constraintBottom_toTopOf="@+id/registrationPageAge"
+        app:layout_constraintEnd_toEndOf="@id/registrationPageRegisterButton"
         app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="@id/registerBtn"
+        app:layout_constraintStart_toStartOf="@id/registrationPageRegisterButton"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/border"
         android:paddingLeft="15dp"

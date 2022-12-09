@@ -9,11 +9,11 @@
 
 
     <LinearLayout
-        android:id="@+id/DistanceGroup"
+        android:id="@+id/runInterfaceDistanceGroup"
         android:layout_width="160dp"
         android:layout_height="98dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/timerGroup"
+        app:layout_constraintBottom_toTopOf="@+id/runInterfaceTimerGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.176">
 
         <TextView
-            android:id="@+id/distanceCounter"
+            android:id="@+id/runInterfaceDistanceCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -30,7 +30,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/distanceLabel"
+            android:id="@+id/runInterfaceDistanceLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/timerGroup"
+        android:id="@+id/runInterfaceTimerGroup"
         android:layout_width="231dp"
         android:layout_height="207dp"
         android:orientation="vertical"
@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.519">
 
         <Chronometer
-            android:id="@+id/timer"
+            android:id="@+id/runInterfaceTimer"
             android:layout_width="122dp"
             android:layout_height="57dp"
             android:layout_gravity="center_horizontal"
@@ -60,7 +60,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/timerLabel"
+            android:id="@+id/runInterfaceTimerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -69,21 +69,21 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/mphGroup"
+        android:id="@+id/runInterfaceMphGroup"
         android:layout_width="160dp"
         android:layout_height="98dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/DistanceGroup"
+        app:layout_constraintEnd_toStartOf="@+id/runInterfaceDistanceGroup"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.254">
 
         <TextView
-            android:id="@+id/speedInmph"
+            android:id="@+id/runInterfaceSpeedInmph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -92,7 +92,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/mphLabel"
+            android:id="@+id/runInterfaceMphLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -101,19 +101,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/kmphGroup"
+        android:id="@+id/runInterfaceKmphGroup"
         android:layout_width="160dp"
         android:layout_height="98dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/DistanceGroup"
+        app:layout_constraintStart_toEndOf="@+id/runInterfaceDistanceGroup"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.254">
 
         <TextView
-            android:id="@+id/speedInkmph"
+            android:id="@+id/runInterfaceSpeedInkmph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -122,7 +122,7 @@
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/kmphLabel"
+            android:id="@+id/runInterfaceKmphLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -131,22 +131,22 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/pause_button"
+        android:id="@+id/runInterfacePauseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:text="Pause Run"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/timerGroup"
+        app:layout_constraintEnd_toStartOf="@+id/runInterfaceTimerGroup"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mphGroup"
+        app:layout_constraintTop_toBottomOf="@+id/runInterfaceMphGroup"
         app:layout_constraintVertical_bias="0.632"
         android:backgroundTint="@color/purple_700"
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/resume_button"
+        android:id="@+id/runInterfaceResumeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
@@ -154,14 +154,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/timerGroup"
-        app:layout_constraintTop_toBottomOf="@+id/kmphGroup"
+        app:layout_constraintStart_toEndOf="@+id/runInterfaceTimerGroup"
+        app:layout_constraintTop_toBottomOf="@+id/runInterfaceKmphGroup"
         app:layout_constraintVertical_bias="0.632"
         android:backgroundTint="@color/purple_700"
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/stop_button"
+        android:id="@+id/runInterfaceStopButton"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="60dp"
         android:layout_height="50dp"
@@ -170,12 +170,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timerGroup"
+        app:layout_constraintTop_toBottomOf="@+id/runInterfaceTimerGroup"
         app:layout_constraintVertical_bias="0.553"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/CountdownTimerView"
+        android:id="@+id/runInterfaceCountdownTimerView"
         android:layout_width="295dp"
         android:layout_height="437dp"
         android:textAlignment="center"

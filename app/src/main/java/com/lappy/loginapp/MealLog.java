@@ -5,9 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,20 +14,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+//import com.squareup.picasso.Picasso;
+
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MealLog extends AppCompatActivity {
+    private final int CAMERA_REQ_CODE = 100;
+    private final int GALLERY_REQ_CODE = 1000;
     MealLogDatabaseHelper mealLogDB;
-    ImageView logImage;
+    ImageView Image;
+    ListView listview;
+    ArrayList<Meals> arrayList;
+    MealLogAdapter adapter;
 
     private final int IMAGE_REQ_CODE = 100;
 
@@ -38,6 +45,15 @@ public class MealLog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_log);
         mealLogDB = new MealLogDatabaseHelper(this);
+        listview = findViewById(R.id.mealLogListView);
+        showMealsData();
+    }
+
+    private void showMealsData() {
+        arrayList = mealLogDB.getMealData();
+        adapter = new MealLogAdapter(this, arrayList);
+        listview.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -50,10 +66,10 @@ public class MealLog extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         LayoutInflater inflater = (LayoutInflater) MealLog.this.getSystemService(LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.meal_add_layout, null);
-        EditText logDate = view.findViewById(R.id.DateEditText);
-        EditText logDescription = view.findViewById(R.id.DescptionEditText);
-        logImage = view.findViewById(R.id.mealLogImageView);
-        logImage.setOnClickListener((new View.OnClickListener() {
+        EditText Date = view.findViewById(R.id.addMealDateInput);
+        EditText Description = view.findViewById(R.id.addMealDescriptionTextView);
+        ImageView Image = view.findViewById(R.id.addMealImageView);
+        Image.setOnClickListener((new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
@@ -74,20 +90,21 @@ public class MealLog extends AppCompatActivity {
         }));
         AlertDialog.Builder builder = new AlertDialog.Builder(MealLog.this);
         builder.setView(view)
-                .setTitle("Adding new log")
+                .setTitle("Adding new meal log")
                 .setMessage("Enter date and description")
                 .setPositiveButton("Add new log", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String date = logDate.getText().toString();
-                        String description = logDescription.toString();
-                      boolean res =  mealLogDB .insertMealLogData(date, description, ImageToByte(logImage));
-                      if (res == true){
-                          Toast.makeText(MealLog.this, "New log added!", Toast.LENGTH_SHORT).show();
-                      }
-                      else{
-                          Toast.makeText(MealLog.this, "Couldn't be added please try again!", Toast.LENGTH_SHORT).show();
-                      }
+                        String date = Date.getText().toString();
+                        String description = Description.toString();
+                        boolean res =  mealLogDB.insertMealLogData(date, description, (byte[]) ImageToByte(Image));
+                        if (res == true){
+                            showMealsData();
+                            Toast.makeText(MealLog.this, "New log added!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(MealLog.this, "Couldn't be added please try again!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -100,7 +117,41 @@ public class MealLog extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);{
+            if (resultCode == RESULT_OK) {
+                if (requestCode == CAMERA_REQ_CODE){
+                    Bitmap Img = (Bitmap)data.getExtras().get("data");
+                    Image.setImageBitmap(Img);
+                }
+                if (requestCode == GALLERY_REQ_CODE) Image.setImageURI(data.getData());
+            }
+        }
+    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//            if (resultCode == RESULT_OK) {
+//                Uri resultUri = result.getUri();
+//                Picasso.with(this).load(resultUri.into(Image))
+////                try {
+////                    InputStream stream = getContentResolver().openInputStream(resultUri);
+////                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+////                    Image.setImageBitmap(bitmap);
+////                }catch (Exception e)
+//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                Exception error = result.getError();
+//            }
+//        }
+//    }
+
     private void PickImage() {
+//        CropImage.activity()
+//                .setGuidelines(CropImageView.Guidelines.ON)
+//                .start(this);
     }
 
     private Object ImageToByte(ImageView logImage) {
@@ -119,25 +170,6 @@ public class MealLog extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void requestCameraPermission() {
         requestPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                Uri resultUri = result.getUri();
-            try {
-                InputStream stream = getContentResolver().openInputStream(resultUri);
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                logImage.setImageBitmap(bitmap);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-//                Exception error = result.getError();
-//            }
-        }
     }
 
     private boolean checkStoragePermission() {

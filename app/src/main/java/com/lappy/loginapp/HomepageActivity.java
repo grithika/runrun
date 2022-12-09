@@ -21,8 +21,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
 
-import java.util.Calendar;
-
 public class HomepageActivity extends AppCompatActivity implements LocationListener {
 
     private static final int PermissionCode = 58;
@@ -35,11 +33,11 @@ public class HomepageActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage2);
 
-        startrun = (ImageView) findViewById(R.id.startRunImageView);
-        runsettings = (ImageView) findViewById(R.id.runSettingsImageView);
-        runhistory = (ImageView) findViewById(R.id.runHistoryImageView);
-        logmeal = (ImageView) findViewById(R.id.logMealImageView);
-        mealhistory = (ImageView) findViewById(R.id.mealHistoryImageView);
+        startrun = (ImageView) findViewById(R.id.homepageStartRun);
+        runsettings = (ImageView) findViewById(R.id.homepageRunSettings);
+        runhistory = (ImageView) findViewById(R.id.homepageRunHistory);
+        logmeal = (ImageView) findViewById(R.id.homepageLogMeal);
+        mealhistory = (ImageView) findViewById(R.id.homepageLogMealHistory);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -94,7 +92,7 @@ public class HomepageActivity extends AppCompatActivity implements LocationListe
         runsettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                runSettings runHistory = new runSettings();
+                runSettings runSettings = new runSettings();
                 new Thread((Runnable) runsettings).start();
             }
 
@@ -112,25 +110,25 @@ public class HomepageActivity extends AppCompatActivity implements LocationListe
         });
 
 
-//        logmeal.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                LogMeal logMeal = new RunSettings();
-//                new Thread((Runnable) logmeal).start();
-//            }
-//
-//            class MealLog implements Runnable{
-//                @Override
-//                public void run(){
-//                    logmeal.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Intent intent = new Intent(HomepageActivity.this, MealLog.class);
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        logmeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MealLog MealLog = new MealLog();
+                new Thread((Runnable) logmeal).start();
+            }
+
+            class MealLog implements Runnable{
+                @Override
+                public void run(){
+                    logmeal.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(HomepageActivity.this, MealLog.class);
+                        }
+                    });
+                }
+            }
+        });
 //
 //        mealhistory.setOnClickListener(new View.OnClickListener() {
 //            @Override
