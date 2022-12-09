@@ -14,16 +14,19 @@ import java.util.ArrayList;
 
 public class MealLogAdapter extends BaseAdapter {
     Context context;
-    ArrayList<Meals> arrayList;
+    ArrayList<Meals> arrayListMeal;
+
+    public MealLogAdapter(MealLog mealLog, ArrayList<Meals> arrayList) {
+    }
 
     @Override
     public int getCount() {
-        return arrayList.size();
+        return arrayListMeal.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return arrayList.get(position);
+        return arrayListMeal.get(position);
     }
 
     @Override
@@ -37,7 +40,7 @@ public class MealLogAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.meal_history_layout, null);
         ImageView MealHistoryImage = convertView.findViewById(R.id.mealHistoryImage);
         TextView MealHistoryDescription = convertView.findViewById(R.id.mealHistoryDescription);
-        Meals MealHistoryMeals = arrayList.get(position);
+        Meals MealHistoryMeals = arrayListMeal.get(position);
         String description = MealHistoryMeals.getDescription();
         byte[] image = MealHistoryMeals.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);

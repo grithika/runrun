@@ -1,46 +1,46 @@
 package com.lappy.loginapp;
 
 public class Meals {
-    int ID;
-    String Date, Description;
-    byte[] Image;
+    int MealID;
+    String MealDate, MealDescription;
+    byte[] MealImage;
 
     public Meals(int ID, String date, String description, byte[] image) {
-        this.ID = ID;
-        Date = date;
-        Description = description;
-        Image = image;
+        this.MealID = ID;
+        MealDate = date;
+        MealDescription = description;
+        MealImage = image;
     }
 
     public int getID() {
-        return ID;
+        return MealID;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.MealID = ID;
     }
 
     public String getDate() {
-        return Date;
+        return MealDate;
     }
 
     public void setDate(String date) {
-        Date = date;
+        MealDate = date;
     }
 
     public String getDescription() {
-        return Description;
+        return MealDescription;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        MealDescription = description;
     }
 
     public byte[] getImage() {
-        return Image;
+        return MealImage;
     }
 
     public void setImage(byte[] image) {
-        Image = image;
+        MealImage = image;
     }
 }

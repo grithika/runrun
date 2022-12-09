@@ -53,13 +53,14 @@
         android:id="@+id/backbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewHistoryTextView"
-        app:layout_constraintVertical_bias="0.974" />
+        app:layout_constraintVertical_bias="0.989" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRecycleLayout"
@@ -69,6 +70,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/all_round_borders"
         app:layout_constraintTop_toTopOf="@+id/logo"
         app:layout_constraintVertical_bias="0.534" />
 

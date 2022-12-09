@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                app:srcCompat="@drawable/background3"
+                app:srcCompat="@drawable/start_run"
                 tools:ignore="SpeakableTextPresentCheck"
                 android:contentDescription="TODO" />
         </LinearLayout>
