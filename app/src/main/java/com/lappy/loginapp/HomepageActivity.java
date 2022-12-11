@@ -2,6 +2,7 @@ package com.lappy.loginapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -16,98 +17,75 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
 
-public class HomepageActivity extends AppCompatActivity implements LocationListener {
+public class HomepageActivity extends AppCompatActivity implements LocationListener, View.OnClickListener {
 
     private static final int PermissionCode = 58;
 
-    ImageView startrun, runsettings,runhistory, logmeal, mealhistory;
+    CardView startrun, runsettings,runhistory, logmeal, mealhistory;
     LocationManager locationManager;
+    Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage2);
 
-        startrun = (ImageView) findViewById(R.id.homepageStartRun);
-        runsettings = (ImageView) findViewById(R.id.homepageRunSettings);
-        runhistory = (ImageView) findViewById(R.id.homepageRunHistory);
-        logmeal = (ImageView) findViewById(R.id.homepageLogMeal);
-        mealhistory = (ImageView) findViewById(R.id.homepageLogMealHistory);
+        startrun = (CardView) findViewById(R.id.homepageStartRun);
+        runsettings = (CardView) findViewById(R.id.homepageRunSettings);
+        runhistory = (CardView) findViewById(R.id.homepageRunHistory);
+        logmeal = (CardView) findViewById(R.id.homepageLogMeal);
+        logoutButton = findViewById(R.id.homepageLogoutButton);
+//        mealhistory = (ImageView) findViewById(R.id.homepageLogMealHistory);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        startrun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                StartRunnable startRunnable = new StartRunnable();
-                new Thread((Runnable) startrun).start();
-            }
 
-            class StartRunnable implements Runnable{
-                @Override
-                public void run(){
-                    startrun.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (ContextCompat.checkSelfPermission(HomepageActivity.this,
-                                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(HomepageActivity.this,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                                    && ContextCompat.checkSelfPermission(HomepageActivity.this,
-                                    Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                                startRunInterface();
-                            } else {
-                                LocationPermissionRequest();
-                            }
-                        }
-                    });
-                }
-            }
-        });
+//          Thread((Runnable)) cannot be applied to cardViewHolder
+//        startrun.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                StartRunnable startRunnable = new StartRunnable();
+//                new Thread((Runnable) startrun).start();
+//            }
+//
+//
+//        });
 
-        runhistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                runHistory runHistory = new runHistory();
-                new Thread((Runnable) runhistory).start();
-            }
-
-            class runHistory implements Runnable{
-                @Override
-                public void run(){
-                    runhistory.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(HomepageActivity.this, RunHistory.class);
-                        }
-                    });
-                }
-            }
-        });
-
-        runsettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                runSettings runSettings = new runSettings();
-                new Thread((Runnable) runsettings).start();
-            }
-
-            class runSettings implements Runnable{
-                @Override
-                public void run(){
-                    runsettings.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(HomepageActivity.this, RunSettings.class);
-                        }
-                    });
-                }
-            }
-        });
+//        runhistory.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                runHistory runHistory = new runHistory();
+//                new Thread((Runnable) runhistory).start();
+//            }
+//
+//
+//        });
+//
+//        runsettings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                runSettings runSettings = new runSettings();
+//                new Thread((Runnable) runsettings).start();
+//            }
+//
+//            class runSettings implements Runnable{
+//                @Override
+//                public void run(){
+//                    runsettings.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Intent intent = new Intent(HomepageActivity.this, RunSettings.class);
+//                        }
+//                    });
+//                }
+//            }
+//        });
 
 
         logmeal.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +107,7 @@ public class HomepageActivity extends AppCompatActivity implements LocationListe
                 }
             }
         });
-//
+//          no more using this variable
 //        mealhistory.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -149,6 +127,56 @@ public class HomepageActivity extends AppCompatActivity implements LocationListe
 //                }
 //            }
 //        });
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.homepageStartRun:
+                StartRunnable startRunnable = new StartRunnable();
+                break;
+            case R.id.homepageRunSettings:
+                runHistory runHistory = new runHistory();
+                break;
+            case R.id.homepageRunHistory:
+                startActivity(new Intent(this, RunHistoryDetails.class));
+                break;
+            case R.id.homepageLogMeal:
+                startActivity(new Intent(this, MealLog.class));
+                break;
+            case R.id.homepageLogoutButton:
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+        }
+    }
+    class StartRunnable implements Runnable{
+        @Override
+        public void run(){
+            startrun.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (ContextCompat.checkSelfPermission(HomepageActivity.this,
+                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(HomepageActivity.this,
+                            Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                            && ContextCompat.checkSelfPermission(HomepageActivity.this,
+                            Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        startRunInterface();
+                    } else {
+                        LocationPermissionRequest();
+                    }
+                }
+            });
+        }
+    }
+    class runHistory implements Runnable{
+        @Override
+        public void run(){
+            runhistory.post(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(HomepageActivity.this, RunHistoryDetails.class);
+                }
+            });
+        }
     }
 
     private void LocationPermissionRequest() {

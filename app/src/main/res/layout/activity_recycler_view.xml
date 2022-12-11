@@ -16,8 +16,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="MY FITNESS APP"
+        android:text="RUNRUN"
         android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"
         android:textSize="48sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find your motive"
+        android:textColor="@color/purple_500"
+        android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewHistoryTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -37,7 +41,7 @@
 
     <TextView
         android:id="@+id/recyclerViewHistoryTextView"
-        android:layout_width="406dp"
+        android:layout_width="393dp"
         android:layout_height="42dp"
         android:text="History"
         android:textAlignment="center"
@@ -49,31 +53,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.179" />
 
-    <Button
-        android:id="@+id/backbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHistoryTextView"
-        app:layout_constraintVertical_bias="0.989" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRecycleLayout"
-        android:layout_width="412dp"
-        android:layout_height="446dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/all_round_borders"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:background="@drawable/all_round_borders"
-        app:layout_constraintTop_toTopOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logo" />
+
+    <TextView
+        android:id="@+id/recyclerViewEmptyActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="110dp"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:text="Your history is empty"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="428dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,24 +18,23 @@ import java.util.ArrayList;
 public class RunHistoryDetails extends AppCompatActivity {
 
     RunDatabaseHelper RunDatabase;
-
-
     RecyclerView recyclerView;
     TextView EmptyActivity;
     RecyclerAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
     ArrayList<RunActivityRetriever> arrayList = new ArrayList<>();
 
-    Button returnButton, settings_btn, deleteButton;
+    Button settings_btn, deleteButton;
 
 
-    //@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
 
         recyclerView = recyclerView.findViewById(R.id.recyclerViewRecycleLayout);
-        //EmptyActivity = recyclerView.findViewById(R.id.EmptyActivity);
+        EmptyActivity = recyclerView.findViewById(R.id.recyclerViewEmptyActivity);
+        deleteButton = recyclerView.findViewById(R.id.runHistoryDeleteButton);
         RunDatabase = new RunDatabaseHelper(this);
 
 
@@ -46,8 +45,6 @@ public class RunHistoryDetails extends AppCompatActivity {
         final SQLiteDatabase sqLiteDatabase = RunDatabase.getWritableDatabase();
         final Cursor cursor = RunDatabase.RetrieveDataFromDatabase(sqLiteDatabase);
 
-
-        returnButton = recyclerView.findViewById(R.id.backbutton);
 
 
         if (cursor.moveToFirst()) {
@@ -65,70 +62,22 @@ public class RunHistoryDetails extends AppCompatActivity {
         } else
             EmptyActivity.setVisibility(View.VISIBLE);
 
-        //RunDatabaseHelper.close();
+        RunDatabase.close();
 
-        //adapter = new RecyclerAdapter(arrayList);
+        adapter = new RecyclerAdapter(arrayList);
         recyclerView.setAdapter(adapter);
 
-
-        returnButton.setOnClickListener(new View.OnClickListener() {
+        adapter.setItemListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                ReturnButtonRunnable returnButtonRunnable = new ReturnButtonRunnable();
-                new Thread(returnButtonRunnable).start();
+            public void onDeleteClick(int position) {
+                deteleItems(position);
             }
 
-            class ReturnButtonRunnable implements Runnable {
-                @Override
-                public void run() {
-                    returnButton.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(RunHistoryDetails.this, HomepageActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
+            private void deteleItems(int position) {
+                arrayList.remove(position);
+                adapter.notifyItemRemoved(position);
             }
         });
-
-        settings_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SettingsBtnRunnable settingsBtnRunnable = new SettingsBtnRunnable();
-                new Thread(settingsBtnRunnable).start();
-
-            }
-
-            class SettingsBtnRunnable implements Runnable {
-                @Override
-                public void run() {
-                    settings_btn.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(RunHistoryDetails.this, RunSettings.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
-            }
-        });
-
-//        adapter.setItemListener(new RecyclerAdapter.OnItemClickListener() {
-//            @Override
-//            public void onDeleteClick(int position) {
-//            }
-//
-//            @Override
-//            public void onDelete(int position) {
-//                deleteItems(position);
-//            }
-//
-//            private void deleteItems(int position) {
-//                arrayList.remove(position);
-//                adapter.notifyItemRemoved(position);
-//            }
-//        });
 
     }
 }

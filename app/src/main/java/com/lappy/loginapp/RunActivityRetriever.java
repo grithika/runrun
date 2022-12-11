@@ -5,22 +5,29 @@ public class RunActivityRetriever {
     private String TimeElapsed;
     private String TotalDistance;
     private String date;
-    private String Id;
+    private String ID;
 
-    public RunActivityRetriever(String elapsed_time, String total_distance, String date, String Id) {
-        this.setElapsed_time(elapsed_time);
-        this.setTotal_distance(total_distance);
+    public RunActivityRetriever(String timeElapsed, String totalDistance, String date, String id) {
+        setTimeElapsed(timeElapsed);
+        setTotalDistance(totalDistance);
         this.setDate(date);
-        this.setId(Id);
+        setId(id);
     }
 
-
-    public String getId() {
-        return Id;
+    public String getTimeElapsed() {
+        return TimeElapsed;
     }
 
-    public void setId(String id) {
-        this.Id = id;
+    public void setTimeElapsed(String timeElapsed) {
+        TimeElapsed = timeElapsed;
+    }
+
+    public String getTotalDistance() {
+        return TotalDistance;
+    }
+
+    public void setTotalDistance(String totalDistance) {
+        TotalDistance = totalDistance;
     }
 
     public String getDate() {
@@ -31,20 +38,11 @@ public class RunActivityRetriever {
         this.date = date;
     }
 
-
-    public String getElapsed_time() {
-        return TimeElapsed;
+    public String getId() {
+        return ID;
     }
 
-    public void setElapsed_time(String elapsed_time) {
-        TimeElapsed = elapsed_time;
-    }
-
-    public String getTotal_distance() {
-        return TotalDistance;
-    }
-
-    public void setTotal_distance(String total_distance) {
-        TotalDistance = total_distance;
+    public void setId(String id) {
+        ID = id;
     }
 }

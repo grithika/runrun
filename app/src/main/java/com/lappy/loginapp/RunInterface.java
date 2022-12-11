@@ -28,7 +28,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +40,7 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class RunInterface extends AppCompatActivity {
+public class RunInterface extends AppCompatActivity implements com.google.android.gms.location.LocationListener, android.location.LocationListener {
 
     RunDatabaseHelper Run_database;
 
@@ -65,7 +64,7 @@ public class RunInterface extends AppCompatActivity {
     double current_speed;
 
     LinearLayout distanceButtonGroup;
-    RadioButton milesButton, kilometerButton;
+//    RadioButton milesButton, kilometerButton;
 
     private static final int AccessCode = 48;
     String current_date;
@@ -95,9 +94,12 @@ public class RunInterface extends AppCompatActivity {
         CountDownSwitch();
 
 
-        timer.setOnChronometerTickListener(chronometer -> {
-            if ((SystemClock.elapsedRealtime() - timer.getBase()) >= 86400000) {
-                chronometer.setBase(SystemClock.elapsedRealtime());
+        timer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if ((SystemClock.elapsedRealtime() - timer.getBase()) >= 86400000) {
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                }
             }
         });
 
@@ -223,20 +225,21 @@ public class RunInterface extends AppCompatActivity {
         if (requestCode == AccessCode) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 LocationCall();
-
+//                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
             }
             else {
                 Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
-
             }
+
         }
+
     }
 
     private void createLocationRequest() {
-        locationRequest = com.google.android.gms.location.LocationRequest.create();
+        locationRequest = LocationRequest.create();
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(5000);
-        locationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     public void LocationCall() {
@@ -246,8 +249,6 @@ public class RunInterface extends AppCompatActivity {
                     .setPositiveButton("Turn location on", (dialog, which) -> {
                         Intent call_gps_settings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         startActivity(call_gps_settings);
-
-
                     })
                     .setNegativeButton("Cancel", (dialog, which) -> {
 
@@ -258,13 +259,14 @@ public class RunInterface extends AppCompatActivity {
     }
 
 
-    //@Override
+    @Override
     public void onLocationChanged(Location location) {
         current_location = location;
         if (start_location == null) {
             start_location = current_location;
             end_location = current_location;
-        } else
+        }
+        else
             end_location = current_location;
 
         ChooseMetricUnits();
@@ -278,21 +280,21 @@ public class RunInterface extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onStatusChanged(String provider, int status, Bundle extras) {
-//
-//    }
-//
-//    @Override
-//    public void onProviderEnabled(String provider) {
-//
-//    }
-//
-//
-//    @Override
-//    public void onProviderDisabled(String provider) {
-//
-//    }
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 
 
     private void distanceInMiles() {
@@ -354,7 +356,7 @@ public class RunInterface extends AppCompatActivity {
             public void onFinish() {
                 active = false;
                 AutoStartActivity();
-                //countdownTimerView.setVisibility(View.GONE);
+                countdownTimerView.setVisibility(View.GONE);
 
                 resumeButton.setEnabled(true);
                 //resumeButton.setBackgroundResource(R.drawable.resume_button);
@@ -395,7 +397,7 @@ public class RunInterface extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             resumeButton.performContextClick();
         }
-        View resumeButton = findViewById(R.id.runInterfaceResumeButton);
+        resumeButton = findViewById(R.id.runInterfaceResumeButton);
         resumeButton.performClick();
 
     }

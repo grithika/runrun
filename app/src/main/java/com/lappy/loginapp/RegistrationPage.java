@@ -42,19 +42,19 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
 
         mAuth = FirebaseAuth.getInstance();
 
-        applogo = (TextView) findViewById(R.id.appLogo);
+        applogo = findViewById(R.id.appLogo);
         applogo.setOnClickListener(this);
 
-        registerbtn = (TextView) findViewById(R.id.registrationPageRegisterButton);
+        registerbtn = findViewById(R.id.registrationPageRegisterButton);
         registerbtn.setOnClickListener(this);
 
-        firstname = (EditText) findViewById(R.id.registrationPageFirstName);
-        lastname = (EditText) findViewById(R.id.registrationPageLastName);
-        years = (EditText) findViewById(R.id.registrationPageAge);
-        emailId = (EditText) findViewById(R.id.registrationPageEmailId);
-        pass = (EditText) findViewById(R.id.registrationPagePassword);
+        firstname = findViewById(R.id.registrationPageFirstName);
+        lastname = findViewById(R.id.registrationPageLastName);
+        years = findViewById(R.id.registrationPageAge);
+        emailId = findViewById(R.id.registrationPageEmailId);
+        pass = findViewById(R.id.registrationPagePassword);
 
-        progressBar = (ProgressBar) findViewById(R.id.registrationPageProgressBar);
+        progressBar = findViewById(R.id.registrationPageProgressBar);
 
 
     }
@@ -121,7 +121,6 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            //User user = new User(firstname, lastname, age1, emailid);
                             User user = new User(firstName, lastName, age, emailIdR);
 
                             FirebaseDatabase.getDatabase().getReference("Users")
@@ -133,8 +132,6 @@ public class RegistrationPage extends AppCompatActivity implements View.OnClickL
                                             if(task.isSuccessful()){
                                                 Toast.makeText(RegistrationPage.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
-
-                                                //redirect to login activity
                                             }
                                             else{
                                                 Toast.makeText(RegistrationPage.this, "Failed to register the user. Try again!", Toast.LENGTH_LONG).show();

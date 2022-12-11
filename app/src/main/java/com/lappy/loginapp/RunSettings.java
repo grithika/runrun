@@ -22,7 +22,7 @@ public class RunSettings extends AppCompatActivity {
     RadioGroup distanceGroup, countdownGroup;
     RadioButton onButton,offButton,kmButton, milesButton;
     SharedPreferences sharedPreferences, LastSelectedItem,LastChosen;
-    SharedPreferences.Editor editor;
+//    SharedPreferences.Editor editor;
 
 
     @Override
@@ -42,12 +42,6 @@ public class RunSettings extends AppCompatActivity {
         offButton = findViewById(R.id.runSettingsOffButton);
         countdownGroup = findViewById(R.id.runSettingsCountdownGroupButtons);
 
-        final int LastSelection = LastSelectedItem.getInt("LastSelection", 0);
-        editor = LastSelectedItem.edit();
-
-        final int DefaultItem = LastChosen.getInt("LastChosen", 0);
-        editor = LastChosen.edit();
-
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,8 +60,6 @@ public class RunSettings extends AppCompatActivity {
                             editor.putBoolean(km_Button, kmButton.isChecked());
                             editor.putBoolean(ON, onButton.isChecked());
                             editor.putBoolean(OFF, offButton.isChecked());
-//                            editor.putInt("LastSelection", Myposition);
-//                            editor.putInt("LastChosen", lingoPosition);
                             editor.apply();
                             Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             startActivity(intent);
@@ -163,25 +155,22 @@ public class RunSettings extends AppCompatActivity {
         onButton.setChecked(sharedPreferences.getBoolean(ON, false));
         offButton.setChecked(sharedPreferences.getBoolean(OFF, true));
 
-        backButton.setOnClickListener(view -> startActivity(new Intent(RunSettings.this,HomepageActivity.class)));
-
-//        @Override
-//        public void onBackPressed() {
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putBoolean(miles_Button, milesButton.isChecked());
-//            editor.putBoolean(km_Button, kmButton.isChecked());
-//            editor.putBoolean(ON,onButton.isChecked());
-//            editor.putBoolean(OFF, offButton.isChecked());
-//            editor.apply();
-//            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        backButton.setOnClickListener((View view) -> {
+            startActivity(new Intent(RunSettings.this, HomepageActivity.class));
+        });
 
 
-
-        //TODO create onclicklistner for back button and resolve the above warning
-        //TODO add BMI calculator
-
+    }
+    @Override
+    public void onBackPressed() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(miles_Button, milesButton.isChecked());
+        editor.putBoolean(km_Button, kmButton.isChecked());
+        editor.putBoolean(ON,onButton.isChecked());
+        editor.putBoolean(OFF, offButton.isChecked());
+        editor.apply();
+        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

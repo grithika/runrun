@@ -14,13 +14,14 @@ public class RunDatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_2 = "TimeElapsed";
     public static final String COL_3 = "RunDistance";
     public static final String ROW_1 = "Date";
+
     public RunDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         SQLiteDatabase db = this.getWritableDatabase();
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (Id INTEGER PRIMARY KEY AUTOINCREMENT, Elapsed_Time INTEGER,  Total_Distance INTEGER, Date String)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, TimeElapsed INTEGER,  RunDistance INTEGER, Date String)");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -28,12 +29,12 @@ public class RunDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String elapsed_time, String total_distance, String current_date) {
+    public boolean insertData(String TimeElapsed, String RunDistance, String Date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ROW_1, current_date);
-        contentValues.put(COL_2, elapsed_time);
-        contentValues.put(COL_3, total_distance);
+        contentValues.put(COL_2, TimeElapsed);
+        contentValues.put(COL_3, RunDistance);
+        contentValues.put(ROW_1, Date);
         long result = db.insert(TABLE_NAME, null, contentValues);
         return result != -1;
     }
@@ -44,17 +45,17 @@ public class RunDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public boolean updateData(String elapsed_time, String total_distance, String current_date) {
+    public boolean updateData(String TimeElapsed, String RunDistance, String Date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ROW_1, current_date);
-        contentValues.put(COL_2, elapsed_time);
-        contentValues.put(COL_3, total_distance);
-        db.update(TABLE_NAME, contentValues, "elapsed_time = ?", new String[]{elapsed_time});
+        contentValues.put(COL_2, TimeElapsed);
+        contentValues.put(COL_3, RunDistance);
+        contentValues.put(ROW_1, Date);
+        db.update(TABLE_NAME, contentValues, "TimeElapsed = ?", new String[]{TimeElapsed});
         return true;
     }
 
     public void DeleteData(String Id) {
-        this.getWritableDatabase().delete(TABLE_NAME, "Id ='" + Id + "'", null);
+        this.getWritableDatabase().delete(TABLE_NAME, "ID ='" + Id + "'", null);
     }
 }

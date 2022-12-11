@@ -2,192 +2,224 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homepageLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomepageActivity"
-    android:backgroundTint="@color/white">
+    android:background="@drawable/background6"
+    app:layoutDescription="@xml/activity_homepage2_scene"
+    tools:context=".HomepageActivity">
 
     <TextView
         android:id="@+id/appLogo"
         android:layout_width="354dp"
         android:layout_height="64dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:text="RUNRUN"
         android:textAlignment="center"
+        android:textColor="@color/purple_700"
         android:textSize="48sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007"
-        android:textColor="@color/black"/>
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find your motive"
-        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textColor="@color/purple_500"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appLogo" />
+
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="388dp"
+        android:layout_height="508dp"
+        app:columnCount="2"
+        app:layout_constraintBottom_toTopOf="@+id/homepageLogoutButton"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:rowCount="2"
+        tools:layout_editor_absoluteX="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/homepageStartRun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="20dp"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill"
+            app:layout_row="0"
+            app:layout_rowWeight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="112dp"
+                    android:layout_height="147dp"
+                    app:layout_column="0"
+                    app:layout_row="0"
+                    app:srcCompat="@drawable/running_logo" />
+
+                <TextView
+                    android:id="@+id/startRun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Run"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/homepageRunHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="20dp"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill"
+            app:layout_row="0"
+            app:layout_rowWeight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="112dp"
+                    android:layout_height="147dp"
+                    app:layout_column="0"
+                    app:layout_row="0"
+                    app:srcCompat="@drawable/run_history_logo" />
+
+                <TextView
+                    android:id="@+id/RunHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Run History"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/homepageRunSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="20dp"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill"
+            app:layout_row="1"
+            app:layout_rowWeight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="112dp"
+                    android:layout_height="147dp"
+                    app:layout_column="0"
+                    app:layout_row="0"
+                    app:srcCompat="@drawable/run_setting_logo" />
+
+                <TextView
+                    android:id="@+id/RunSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Run Settings"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/homepageLogMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="20dp"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill"
+            app:layout_row="1"
+            app:layout_rowWeight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="112dp"
+                    android:layout_height="147dp"
+                    app:layout_column="0"
+                    app:layout_row="0"
+                    app:srcCompat="@drawable/meal_log_logo" />
+
+                <TextView
+                    android:id="@+id/MealLog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Meal Log"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <Button
+        android:id="@+id/homepageLogoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/border"
+        android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="402dp"
-        android:layout_height="209dp"
-        android:layout_marginBottom="70dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="1.0">
-
-        <LinearLayout
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/homepageLogMeal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                app:srcCompat="@drawable/log_meal"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/homepageLogMealHistory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                app:srcCompat="@drawable/meal_history"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:srcCompat="@tools:sample/avatars"
-                android:contentDescription="TODO" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="402dp"
-        android:layout_height="209dp"
-        android:layout_marginTop="116dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appLogo"
-        app:layout_constraintVertical_bias="0.117">
-
-
-        <LinearLayout
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/homepageStartRun"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                app:srcCompat="@drawable/start_run"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/homepageRunSettings"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                app:srcCompat="@drawable/settings_all"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/homepageRunHistory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                app:srcCompat="@drawable/run_history"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="TODO" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/run"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="RUN"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        android:textColor="@color/black"
         app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/meal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MEAL"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.714"
-        android:textColor="@color/black"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

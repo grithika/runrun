@@ -2,11 +2,12 @@ package com.lappy.loginapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.DialogInterface;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,39 +16,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecyclerAdapter extends RecyclerView.Adapter {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
 
     private ArrayList<RunActivityRetriever> arrayList;
-    private AdapterView.OnItemClickListener deleteListener;
+    private OnItemClickListener deleteListener;
 
     public interface OnItemClickListener {
         void onDeleteClick(int position);
     }
-//    public interface SetItemListener(OnItemClickListener listener) {
-//        deleteListener = listener;
-//    }
+
+    public void setItemListener(OnItemClickListener listener) {
+        deleteListener = listener;
+    }
     public RecyclerAdapter(ArrayList<RunActivityRetriever> arrayList){
         this.arrayList = arrayList;
     }
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_run_history, parent, false);
-        RecyclerViewHolder RVH = new RecyclerViewHolder(view, (OnItemClickListener) deleteListener, context, arrayList);
-
+        RecyclerViewHolder RVH = new RecyclerViewHolder(view, deleteListener, context, arrayList);
         return RVH;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//        RunActivityRetriever retrieveRunnerActivity = arrayList.get(position);
-//        holder.Duration_column.setText(String.valueOf(retrieveRunnerActivity.getElapsed_time()));
-//        holder.Distance_column.setText(String.valueOf(retrieveRunnerActivity.getTotal_distance()));
-//        holder.date_heading.setText(String.valueOf(retrieveRunnerActivity.getDate()));
-//        holder.Entry_column.setText(String.valueOf(retrieveRunnerActivity.getId()));
-//        holder.deleteButton.getContext();
+    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+        RunActivityRetriever runActivityRetriever = arrayList.get(position);
+        holder.Duration_column.setText(String.valueOf(runActivityRetriever.getTimeElapsed()));
+        holder.Distance_column.setText(String.valueOf(runActivityRetriever.getTotalDistance()));
+        holder.date_heading.setText(String.valueOf(runActivityRetriever.getDate()));
+        holder.Entry_column.setText(String.valueOf(runActivityRetriever.getId()));
+        holder.deleteButton.getContext();
 
     }
 
@@ -58,7 +58,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView deleteButton;
+        Button deleteButton;
         TextView Duration_column, Distance_column, date_heading, Entry_column;
         RunDatabaseHelper RunDatabase;
 
@@ -70,7 +70,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
             Distance_column = view.findViewById(R.id.runHistoryDistanceDisplay);
             date_heading = view.findViewById(R.id.dateDetails);
             Entry_column = view.findViewById(R.id.runHistoryEntryDisplay);
-            deleteButton = view.findViewById(R.id.deleteButton);
+            deleteButton = view.findViewById(R.id.runHistoryDeleteButton);
             deleteButton.setTag(deleteListener);
             final RecyclerAdapter adapter = new RecyclerAdapter(arrayList);
             RunDatabase = new RunDatabaseHelper(context);
@@ -90,13 +90,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
                                         RunDatabase.DeleteData(Entry_column.getText().toString());
                                         adapter.notifyDataSetChanged();
                                         listener.onDeleteClick(getAdapterPosition());
-
                                     }
                                 })
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-
                                     }
                                 });
                         AlertDialog alertDialog = dialogbuilder.create();
