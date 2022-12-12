@@ -269,7 +269,6 @@ public class HomepageActivity extends AppCompatActivity implements LocationListe
                             Intent call_gps_settings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             startActivity(call_gps_settings);
 
-
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
