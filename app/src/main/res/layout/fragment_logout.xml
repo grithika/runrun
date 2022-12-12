@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background6"
+    tools:context=".LogoutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/appLogo"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="RUNRUN"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="48sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find your motive"
+        android:textAlignment="center"
+        android:textColor="@color/purple_500"
+        android:layout_marginTop="60dp"
+        android:textStyle="italic"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingBottom="50dp"
+        android:textSize="20dp"
+        android:text="Please click the button to logout" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:background="@drawable/all_round_borders"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"/>
+
+
+</FrameLayout>

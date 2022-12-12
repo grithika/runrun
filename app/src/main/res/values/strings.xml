@@ -5,4 +5,6 @@
     <string name="google_maps_key">AIzaSyB4bmpOHr4nUG4rujR6PXOLpWaTb4pkoE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_app">This application is built only for the education grading purpose and can be used by anyone who has an APK file.
+    The interest of using this application is solely based on the user and thank you for using this application!</string>
 </resources>
