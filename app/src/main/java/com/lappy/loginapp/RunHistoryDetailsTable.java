@@ -17,7 +17,7 @@ public class RunHistoryDetailsTable extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_run_history);
+        setContentView(R.layout.activity_run_history_table);
 
         durationColumn = findViewById(R.id.runHistoryTimeDisplay);
         distanceColumn = findViewById(R.id.runHistoryDistanceDisplay);

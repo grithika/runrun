@@ -39,7 +39,7 @@
 
     <LinearLayout
         android:id="@+id/addMealDateLayout"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:orientation="horizontal"
         android:background="@drawable/border"
@@ -70,7 +70,7 @@
 
     <LinearLayout
         android:id="@+id/addMealDescriptionLayout"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:orientation="horizontal"
         android:background="@drawable/border"

@@ -24,7 +24,7 @@ public class RunHistoryDetails extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     ArrayList<RunActivityRetriever> arrayList = new ArrayList<>();
 
-    Button settings_btn, deleteButton;
+    Button deleteButton;
 
 
     @Override

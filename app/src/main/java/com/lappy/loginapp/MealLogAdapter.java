@@ -21,7 +21,8 @@ public class MealLogAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return arrayListMeal.size();
+        int Size = arrayListMeal.size();
+        return Size;
     }
 
     @Override

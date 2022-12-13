@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +22,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -27,7 +31,11 @@ import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +52,8 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
 
     RunDatabaseHelper Run_database;
 
+    TelephonyManager telephonyManager;
+
     FusedLocationProviderClient fusionprovider;
     LocationManager locationManager;
     LocationRequest locationRequest;
@@ -51,6 +61,8 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
 
     TextView distanceCounter, speedInmph, speedInkmph, countdownTimerView;
     Button resumeButton, pauseButton, stopButton;
+
+    ImageView overlayscreen;
 
     Chronometer timer;
     CountDownTimer countDownTimer;
@@ -63,11 +75,20 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
     double distance = 0;
     double current_speed;
 
+    RadioGroup distancebtn_group;
+    RadioButton miles_btn;
+    RadioButton kilometer_btn;
+
     LinearLayout distanceButtonGroup;
 //    RadioButton milesButton, kilometerButton;
 
     private static final int AccessCode = 48;
+
+    String CATEGORY_APP_MUSIC = "android.intent.action.MUSIC_PLAYER";
+
     String current_date;
+
+    Spinner themeSpinner;
 
 
     @Override
@@ -171,7 +192,7 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
                         class StopRunnable implements Runnable {
                             @Override
                             public void run() {
-                                stopButton.post(RunInterface.this::SaveData);
+                                SaveData();
                             }
                         }
                     });
@@ -224,10 +245,12 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == AccessCode) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
                 LocationCall();
-//                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
+
             }
             else {
+                createLocationRequest();
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
             }
 
@@ -237,8 +260,8 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
 
     private void createLocationRequest() {
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(5000);
-        locationRequest.setFastestInterval(5000);
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(10000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -246,12 +269,20 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
             dialogbuilder.setMessage(" Enable GPS To Continue")
-                    .setPositiveButton("Turn location on", (dialog, which) -> {
-                        Intent call_gps_settings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(call_gps_settings);
-                    })
-                    .setNegativeButton("Cancel", (dialog, which) -> {
+                    .setPositiveButton("Turn location on", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent call_gps_settings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(call_gps_settings);
 
+
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
                     });
             AlertDialog alertDialog = dialogbuilder.create();
             alertDialog.show();
@@ -448,6 +479,56 @@ public class RunInterface extends AppCompatActivity implements com.google.androi
         speedInkmph.setText(new DecimalFormat("0.00").format(current_speed));
 
 
+    }
+    PhoneStateListener phoneStateListener = new PhoneStateListener() {
+        @Override
+        public void onCallStateChanged(int state, String phoneNumber) {
+
+            if (state == TelephonyManager.CALL_STATE_RINGING || state == TelephonyManager.CALL_STATE_OFFHOOK) {
+                timer.stop();
+                active = false;
+                resumeButton.setVisibility(View.VISIBLE);
+                update = SystemClock.elapsedRealtime() - timer.getBase();
+                locationManager.removeUpdates(RunInterface.this);
+            } else if (state == TelephonyManager.CALL_STATE_IDLE) {
+                timer.stop();
+                active = false;
+                resumeButton.setVisibility(View.VISIBLE);
+                update = SystemClock.elapsedRealtime() - timer.getBase();
+                locationManager.removeUpdates(RunInterface.this);
+
+            }
+        }
+    };
+    public void ActiveApp() {
+        ComponentName componentName = new ComponentName(this, IncomingCall.class);
+        getPackageManager().setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
+
+    }
+    public void ClosedApp() {
+        ComponentName componentName = new ComponentName(this, IncomingCall.class);
+        getPackageManager().setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+
+
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
+        ClosedApp();
+    }
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        //ActiveApp();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE);
+        ClosedApp();
     }
 
     @Override
